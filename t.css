@@ -1,3 +1,30 @@
 *{
   text-align: center;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.scorediv{
+  padding: 2px 5px;
+  text-align: center;
+
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+.footer{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+
+  width: 100px;
+  height: 25px;
+}
+.scoreText{
+  padding-right: 2px;
+}
+.scoreValue{
+  padding: 0px 5px;
 }

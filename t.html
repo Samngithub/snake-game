@@ -4,15 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="t.css">
-  <title>9</title>
+  <title>snake</title>
 </head>
 <body>
   <div class="candiv">
+    <h2>snake game</h2>
+    <p><i>you can press ENTER or BACKSPACE to restart</i></p>
     <canvas class="can" height="500" width="500"></canvas>
-    <button class="btn">restart</button>
+    
   </div>
+ 
+  <div class="footer">
+      <button class="btn">restart</button>
+      <div class="scorediv">
+        <p class="scoreText">score:</p>
+        <p class="scoreValue"></p>
+        </div>
+  </div>
+ 
   <script src="t.js"></script>
+  
 </body>
 </html>
