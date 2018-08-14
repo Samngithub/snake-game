@@ -1,40 +1,53 @@
 $(document).ready(()=>{
+  initGame()
+})
+initGame=()=>{
   let can = $(".can")[0];
   ctx = can.getContext("2d");
-
   let snake = [],cell=10,length=5,d="right",score=0,canDim=500;
 
-  for(i=0;i<length;i++){
-    snake.push({x:i,y:25});
-  };
+  for(i=0 ; i<length; i++){snake.push({x:5,y:i})}
+ 
   food={
     x:Math.floor(Math.random()*(canDim/cell)),
     y:Math.floor(Math.random()*(canDim/cell))
   }
   paintCell=(x,y,strokeColor,fillColor)=>{
-    // ctx.fillStyle="red";
     ctx.fillStyle=fillColor;
     ctx.fillRect(x*cell,y*cell,cell,cell);
     ctx.strokeStyle=strokeColor;
-    // ctx.strokeStyle="black";
     ctx.strokeRect(x*cell,y*cell,cell,cell);
     };
 
-  paintSnake=()=>{
+
+
+  playGame=()=>{
+    function check_collision(head, budy){
+      for(let i = 0;i < budy.length; i++){
+       if(head.x == budy[i].x && head.y == budy[i].y){
+        return true
+       }
+      }
+    }
+    function appendLoose() {
+      var para = document.createElement("P");
+      var t = document.createTextNode("you lost, press the button to play again.");
+      para.appendChild(t);
+      document.querySelector(".header").appendChild(para); 
+      para.setAttribute("class", "loose")
+  }
     // canvas
-    ctx.fillStyle="lightgreen";
+    ctx.fillStyle = "lightgreen";
     ctx.fillRect(0,0,canDim,canDim);
 
     snakex=snake[0].x;
     snakey=snake[0].y;
    
-  
     if(snakex==food.x && snakey==food.y){
       food={
         x:Math.floor(Math.random()*(canDim/cell)),
         y:Math.floor(Math.random()*(canDim/cell))
       }
-      console.log("food been eaten")
       score += 1;
     }else {
       snake.pop();
@@ -62,25 +75,34 @@ $(document).ready(()=>{
         d="down"
       };
     })
-    
   
     newHead = {x:snakex,y:snakey};
+
+    let snakeBudy = snake.slice(1,snake.length)
+
     snake.unshift(newHead);
- 
+
     // paint snake
     snake.forEach((el)=>{paintCell(el.x,el.y,"black","red")})
     // paint food
     paintCell(food.x,food.y,"black","yellow");
     // restart
-    $(".btn").click(()=>{location.reload()})
+    $(".btn").click(()=>{
+      $( ".loose" ).remove();
+      clearInterval(game)
+      initGame()})
     // game fails
-    if(snakex>=(canDim/cell)||snakex<0||snakey>=(canDim/cell)||snakey<0){
+    if(snakex>=(canDim/cell)||snakex<0||snakey>=(canDim/cell)||snakey<0|| check_collision(newHead,snakeBudy)){
+    
+    appendLoose()
       clearInterval(game)
     }
     $(".scoreValue").text(score)
-    checkcolition=()=>{}
   }
-  game = setInterval(paintSnake,100)
+  
+  game = setInterval(playGame,100)
   $(document).keypress(()=>{location.reload()})
   
-})
+}
+
+

@@ -4,6 +4,11 @@
   font-family: sans-serif;
 }
 
+.loose{
+  color:red;
+  font-weight: 600;
+  font-size: 30px;
+}
 .scorediv{
   padding: 2px 5px;
   text-align: center;
